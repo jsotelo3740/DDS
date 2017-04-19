@@ -17,8 +17,8 @@ public class Analista {
 
 	//Metodos
 	
-	public void cargarCuentaNueva(String nombreEmpresa, String periodo, String nombreCuenta, Double valor){
-		this.cuentas.add(new Cuenta(nombreCuenta, nombreEmpresa, periodo, valor));
+	public void cargarCuentaNueva(Cuenta unaCuenta){
+		this.cuentas.add(unaCuenta);
 	}
 	
 	public void cargarCuentas(String archivo){
@@ -31,7 +31,9 @@ public class Analista {
 					String periodo = archivoCuentas.get("Periodo");
 					String nombreCuenta = archivoCuentas.get("NombreCuenta");
 					Double valor = Double.parseDouble(archivoCuentas.get("Valor"));					
-					this.cargarCuentaNueva(nombreEmpresa, periodo, nombreCuenta, valor);
+					
+					Cuenta unaCuenta = new Cuenta(nombreCuenta, nombreEmpresa, periodo, valor);
+					this.cargarCuentaNueva(unaCuenta);
 					
 					
 				}
