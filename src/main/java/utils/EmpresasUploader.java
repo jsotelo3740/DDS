@@ -2,7 +2,9 @@ package utils;
 
 
 import org.json.simple.parser.ParseException;
-import sad.Empresa;
+
+import dominio.Empresa;
+
 import java.util.List;
 
 public interface EmpresasUploader {

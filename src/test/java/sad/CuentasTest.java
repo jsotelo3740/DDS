@@ -3,6 +3,8 @@ package sad;
 import static org.junit.Assert.*;
 import org.junit.*;
 
+import dominio.Analista;
+
 
 public class CuentasTest {
 	

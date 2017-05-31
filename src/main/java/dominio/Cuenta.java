@@ -1,4 +1,4 @@
-package sad;
+package dominio;
 
 import java.math.BigDecimal;
 

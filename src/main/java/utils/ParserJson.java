@@ -1,7 +1,9 @@
 package utils;
 
 import com.google.gson.Gson;
-import sad.Empresa;
+
+import dominio.Empresa;
+
 import org.json.simple.JSONObject;
 
 public class ParserJson {
