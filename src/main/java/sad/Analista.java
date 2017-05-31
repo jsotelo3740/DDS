@@ -1,63 +1,52 @@
 package sad;
-
 import java.util.*;
-import com.csvreader.CsvReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+
+
+import utils.EmpresasUpload;
 
 public class Analista {
-
-	public Analista (){
-		this.cuentas = new HashSet<Cuenta>();
-	}
-	
+		
 	//Atributos
-	
-	Set<Cuenta> cuentas;
+	private String ruta;  //Ruta donde se va a buscar el archivo a procesar
+	private List<Empresa> empresas;
 
 	//Metodos
-	
-	public void cargarCuentaNueva(Cuenta unaCuenta){
-		this.cuentas.add(unaCuenta);
+	 
+	public void cargarEmpresas(String ruta){
+ 		final EmpresasUpload empresasUpload = new EmpresasUpload();
+ 		this.agregarEmpresas(empresasUpload.procesarArchivo(ruta));
+ 	
 	}
-	
-	public void cargarCuentas(String archivo){
-		try {
-				CsvReader archivoCuentas = new CsvReader(archivo);
-				archivoCuentas.readHeaders(); 
-				while (archivoCuentas.readRecord())
-				{
-					String nombreEmpresa = archivoCuentas.get("NombreEmpresa");
-					String periodo = archivoCuentas.get("Periodo");
-					String nombreCuenta = archivoCuentas.get("NombreCuenta");
-					Double valor = Double.parseDouble(archivoCuentas.get("Valor"));					
-					
-					Cuenta unaCuenta = new Cuenta(nombreCuenta, nombreEmpresa, periodo, valor);
-					this.cargarCuentaNueva(unaCuenta);
-					
-					
-				}
-				archivoCuentas.close();
-				
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}	
-	
-	public void consultarCuentas(String nombreEmpresa, String periodo) {
-		System.out.println("Empresa : " +  nombreEmpresa + " Periodo : " + periodo);
-		this.cuentas.stream()
-		.filter(cuenta -> cuenta.perteneceAEmpresaYPeriodo(nombreEmpresa, periodo))
-		.forEach(cuenta -> cuenta.mostrarCuenta());
-	}
-			
-	//Getters and Setters
+	public void agregarEmpresas(List<Empresa> empresasAAgregar) {
+        empresas.addAll(empresasAAgregar);
+    }
 
-	public Set<Cuenta> getCuentas() {
+	public Empresa filtrarEmpresas (String nombre) {
+        for (Empresa empresa : empresas) {
+            if (empresa.getNombre().equalsIgnoreCase(nombre)){
+                return empresa;
+            }
+        }
+        return null;
+    }
+	public List<Cuenta> consultarCuentasPorEmpresaYPerdiodo(String nombreEmpresa, int periodo) {
+		List<Cuenta> cuentas;
+		cuentas = filtrarEmpresas(nombreEmpresa).getPeriodo(periodo).getCuentas();
 		return cuentas;
 	}
+	//Getters and Setters
 
-	
+	public List<Empresa> getEmpresas () {
+		return this.empresas;
+	}
+	public void setEmpresas (List<Empresa> empresas) {
+		this.empresas = empresas;
+	}
+	 public String getRuta() {
+	        return ruta;
+	}
+
+	public void setRuta(String ruta) {
+	        this.ruta = ruta;
+	}
 }

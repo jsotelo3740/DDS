@@ -1,66 +1,38 @@
 package sad;
 
+import java.math.BigDecimal;
+
 public class Cuenta {
 
 	//Constructor
 		
-	public Cuenta(String nombreCuenta, String nombreEmpresa, String periodo, Double valor) {
-		this.nombreCuenta = nombreCuenta;
-		this.nombreEmpresa = nombreEmpresa;
-		this.periodo = periodo;
-		this.valor = valor;
+	public Cuenta(String nombreCuenta, BigDecimal monto) {
+		this.nombre = nombreCuenta;
+		this.setMontoCuenta(monto);
 	}
 
 	//Atributos
-	private String nombreCuenta;
-	
-	private String nombreEmpresa;
-	
-	private String periodo;
-	
-	private Double valor;
+	private String nombre;	
+	private BigDecimal monto;
 	
 	//Metodos
-	public void mostrarCuenta(){
-		System.out.println(this.getNombreCuenta() + " : " +  this.getValor());	
-	}
-	
-	public Boolean perteneceAEmpresaYPeriodo(String nombreEmpresa, String periodo){
-		return this.getNombreEmpresa().equals(nombreEmpresa) & this.getPeriodo().equals(periodo);
-	
-	}
 	//Getters and Setters
 
 	public String getNombreCuenta() {
-		return nombreCuenta;
+		return nombre;
 	}
 
 	public void setNombreCuenta(String nombre) {
-		this.nombreCuenta = nombre;
+		this.nombre = nombre;
 	}
 
-	public String getNombreEmpresa() {
-		return nombreEmpresa;
+	
+	public BigDecimal getMontoCuenta() {
+		return monto;
 	}
 
-	public void setNombreEmpresa(String empresa) {
-		this.nombreEmpresa = empresa;
-	}
-
-	public String getPeriodo() {
-		return periodo;
-	}
-
-	public void setPeriodo(String periodo) {
-		this.periodo = periodo;
-	}
-
-	public Double getValor() {
-		return valor;
-	}
-
-	public void setValor(Double valor) {
-		this.valor = valor;
+	public void setMontoCuenta(BigDecimal monto) {
+		this.monto = monto;
 	}	
 	
 	
